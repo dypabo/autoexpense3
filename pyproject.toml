@@ -1,0 +1,20 @@
+[project]
+name = "autoexpense3"
+version = "0.1.0"
+description = "Webapp to catalog automobile expense"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.12.3",
+    "fastapi>=0.115.6",
+    "requests>=2.32.3",
+    "uvicorn>=0.34.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1",
+    "pylint>=3.3.3",
+    "pytest>=8.3.4",
+    "ruff>=0.9.1",
+]
