@@ -13,7 +13,6 @@ preview = true
 select = ["ALL"]
 ignore = [
     "D",  # pydocstyle
-    "SIM",  # simplify
     "PLR",  # pylint refactor
     "CPY",  # copyright
 ]
