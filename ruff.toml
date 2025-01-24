@@ -1,0 +1,22 @@
+target-version = "py39"
+line-length = 88
+indent-width = 4
+
+
+[lint]
+preview = true
+select = ["ALL"]
+ignore = [
+    "D",  # pydocstyle
+    "S",  # assert
+    "ANN",  # annotation
+    "COM",  # commas
+    "PT",  # pytest
+    "SIM",  # simplify
+    "PLR",  # pylint refactor
+    "CPY",  # copyright
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
