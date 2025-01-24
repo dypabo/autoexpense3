@@ -16,6 +16,7 @@ dependencies = [
 dev = [
     "fastapi[standard]>=0.115.6",
     "mypy>=1.14.1",
+    "pre-commit>=4.1.0",
     "pylint>=3.3.3",
     "pytest>=8.3.4",
     "ruff>=0.9.1",

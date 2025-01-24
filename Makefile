@@ -1,7 +1,7 @@
 .PHONY: lint ruff mypy pylint format deploy
 
 lint: ruff mypy pylint
-	
+
 format:
 	uv run ruff format
 
