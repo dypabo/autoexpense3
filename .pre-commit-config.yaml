@@ -10,3 +10,24 @@ repos:
   - id: check-merge-conflict
   - id: check-added-large-files
     args: ['--maxkb=2000']
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: 'v0.9.3'
+  hooks:
+  - id: ruff-format
+    name: ruff formatter
+  - id: ruff
+    name: ruff linter
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: 'v1.14.1'
+  hooks:
+  - id: mypy
+    additional_dependencies:
+    - types-requests
+    - types-beautifulsoup4
+- repo: local
+  hooks:
+  - id: pylint
+    name: pylint
+    entry: uv run pylint ./tests ./autoexpense3
+    language: system
+    types: [ python ]
