@@ -8,7 +8,7 @@ def builder() -> FastAPI:
     app = FastAPI()
 
     @app.get("/")
-    def homepage():
+    def homepage() -> HTMLResponse:
         return HTMLResponse(
             f"""<html><title>{APP_NAME}</title><body>Under construction</body></html>"""
         )
