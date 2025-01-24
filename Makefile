@@ -1,4 +1,4 @@
-.PHONY: lint ruff mypy pylint format deploy
+.PHONY: lint ruff mypy pylint format deploy test test-coverage
 
 lint: ruff mypy pylint
 
@@ -14,6 +14,13 @@ mypy:
 pylint:
 	uv run pylint ./autoexpense3/
 	uv run pylint ./tests/
+
+test:
+	uv run pytest tests autoexpense3
+
+test-coverage:
+	uv run pytest tests autoexpense3  --cov
+
 deploy:
 	ssh autoexpense rm -rf /app
 	ssh autoexpense git clone git@github.com:dypabo/autoexpense3.git /app
