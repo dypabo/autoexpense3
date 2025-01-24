@@ -1,4 +1,5 @@
 import pytest
+import requests
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -19,5 +20,5 @@ def client(app: FastAPI) -> TestClient:
 
 def test_app_name_in_homepage_title(client: TestClient) -> None:
     response = client.get("/")
-    assert response.status_code == 200
+    assert response.status_code == requests.codes.ok
     assert APP_NAME in get_webpage_title(response.content)
