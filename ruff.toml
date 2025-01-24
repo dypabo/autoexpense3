@@ -13,7 +13,6 @@ preview = true
 select = ["ALL"]
 ignore = [
     "D",  # pydocstyle
-    "COM",  # commas
     "PT",  # pytest
     "SIM",  # simplify
     "PLR",  # pylint refactor
