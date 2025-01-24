@@ -12,8 +12,13 @@ preview = true
 preview = true
 select = ["ALL"]
 ignore = [
-    "D",  # pydocstyle
-    "CPY",  # copyright
+    "D100",  # missing docstring in public module
+    "D104",  # missing docstring in public package
+    "D203",  # missing 1 blank line before docstring
+    "D204",  # missing 1 blank line after docstring
+    "D213",  # multiline docstring should start on second line
+    "DOC",  # pydoclint  Mostly arguments and return value annotation. Done with type annotation.
+    "CPY",  # copyright presence
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -23,4 +28,6 @@ unfixable = []
 [lint.per-file-ignores]
 "**/*_test.py" = [
     "S101",  # assert
+    "D102",  # missing docstring in public method
+    "D103",  # missing docstring in public function
 ]

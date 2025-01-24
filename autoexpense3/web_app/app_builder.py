@@ -5,6 +5,7 @@ from autoexpense3.web_app.constants import APP_NAME
 
 
 def builder() -> FastAPI:
+    """Return a FastAPI application."""
     app = FastAPI()
 
     @app.get("/")
