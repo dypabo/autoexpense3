@@ -19,6 +19,7 @@ ignore = [
     "D213",  # multiline docstring should start on second line
     "DOC",  # pydoclint  Mostly arguments and return value annotation. Done with type annotation.
     "CPY",  # copyright presence
+    "COM812",  # trailing comma. As suggested by ruff formatter command
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
