@@ -6,4 +6,4 @@ from autoexpense3.web_app.constants import APP_URL
 
 @fixture
 def homepage_content():
-    return requests.get(APP_URL).text
+    return requests.get(APP_URL, timeout=3).text

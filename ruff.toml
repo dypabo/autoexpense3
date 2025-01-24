@@ -13,7 +13,6 @@ preview = true
 select = ["ALL"]
 ignore = [
     "D",  # pydocstyle
-    "S",  # assert
     "ANN",  # annotation
     "COM",  # commas
     "PT",  # pytest
@@ -25,3 +24,8 @@ ignore = [
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
+
+[lint.per-file-ignores]
+"**/*_test.py" = [
+    "S101",  # assert
+]
