@@ -16,6 +16,9 @@ pylint:
 	uv run pylint ./tests/
 
 test:
+	uv run pytest tests/unit autoexpense3
+
+test-system:
 	uv run pytest tests autoexpense3
 
 test-coverage:
