@@ -12,3 +12,8 @@ def _get_first_tag(html: str, tag: str) -> Tag:
 def get_webpage_title(html: str) -> str:
     """Return the webpage title string for an HTML string."""
     return _get_first_tag(html, "title").text
+
+
+def get_webpage_expenses(html: str) -> str:
+    """Return the list of `expense`."""
+    return _get_first_tag(html, "section").text
