@@ -20,6 +20,7 @@ ignore = [
     "DOC",  # pydoclint  Mostly arguments and return value annotation. Done with type annotation.
     "CPY",  # copyright presence
     "COM812",  # trailing comma. As suggested by ruff formatter command
+    "FIX002",  # line contains TODO, consider resolving the issue
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
