@@ -2,11 +2,15 @@ from bs4 import BeautifulSoup
 from bs4.element import Tag
 
 
-def _get_first_tag(html: str, tag: str) -> Tag:
-    """In an HTML string, return the the first matching tag."""
+def _get_tags(html: str, tag: str) -> list[Tag]:
     soup = BeautifulSoup(html, features="html.parser")
     tags = soup.select(tag)
-    return tags[0]
+    return list(tags)
+
+
+def _get_first_tag(html: str, tag: str) -> Tag:
+    """In an HTML string, return the the first matching tag."""
+    return _get_tags(html, tag)[0]
 
 
 def get_webpage_title(html: str) -> str:
