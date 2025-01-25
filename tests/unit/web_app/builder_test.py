@@ -21,4 +21,5 @@ def client(app: FastAPI) -> TestClient:
 def test_app_name_in_homepage_title(client: TestClient) -> None:
     response = client.get("/")
     assert response.status_code == requests.codes.get("ok")
-    assert APP_NAME in get_webpage_title(str(response.content))
+    content = str(response.content)
+    assert APP_NAME in get_webpage_title(content)
