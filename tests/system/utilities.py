@@ -1,14 +1,19 @@
+from datetime import UTC, datetime
+
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
+from autoexpense3.models.expense import Expense
 
-def _get_tags(html: str, tag: str) -> list[Tag]:
-    soup = BeautifulSoup(html, features="html.parser")
-    tags = soup.select(tag)
+
+def _get_tags(html: str | Tag, tag: str) -> list[Tag]:
+    if isinstance(html, str):
+        html = BeautifulSoup(html)
+    tags = html.select(tag)
     return list(tags)
 
 
-def _get_first_tag(html: str, tag: str) -> Tag:
+def _get_first_tag(html: str | Tag, tag: str) -> Tag:
     """In an HTML string, return the the first matching tag."""
     return _get_tags(html, tag)[0]
 
@@ -18,6 +23,15 @@ def get_webpage_title(html: str) -> str:
     return _get_first_tag(html, "title").text
 
 
-def get_webpage_expenses(html: str) -> str:
+def get_webpage_expenses(html: str) -> list[Expense]:
     """Return the list of `expense`."""
-    return _get_first_tag(html, "section").text
+
+    def build_expense(expense_html: str) -> Expense:
+        date = datetime.strptime(
+            _get_first_tag(expense_html, "h3").text, "%Y-%m-%d"
+        ).astimezone(UTC)
+        total = float(_get_first_tag(expense_html, "h4").text.strip("$"))
+        return Expense(date, total)
+
+    expenses = _get_tags(html, ".expense")
+    return [build_expense(str(t)) for t in expenses]

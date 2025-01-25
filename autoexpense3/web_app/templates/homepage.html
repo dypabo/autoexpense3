@@ -3,6 +3,15 @@
     <title>{{app_name}}</title>
   </head>
   <body>
-Under construction
+    <section class="expenses">
+        <ul>
+        {% for expense in expenses %}
+        <li><article class="expense">
+          <h3>{{ expense.timestamp.strftime("%Y-%m-%d") }}</h3>
+          <h4>{{ "%.02f" |format(expense.total) }}$</h4>
+        </article></li>
+        {% endfor %}
+        </ul>
+    </section>
   </body>
 </html>
