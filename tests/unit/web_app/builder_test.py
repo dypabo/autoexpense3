@@ -18,8 +18,16 @@ def client(app: FastAPI) -> TestClient:
     return TestClient(app)
 
 
-def test_app_name_in_homepage_title(client: TestClient) -> None:
+@pytest.fixture
+def homepage_content(client: TestClient) -> str:
+    response = client.get("/")
+    return str(response.content)
+
+
+def test_homepage_response_code_is_ok(client: TestClient) -> None:
     response = client.get("/")
     assert response.status_code == requests.codes.get("ok")
-    content = str(response.content)
-    assert APP_NAME in get_webpage_title(content)
+
+
+def test_app_name_in_homepage_title(homepage_content: str) -> None:
+    assert APP_NAME in get_webpage_title(homepage_content)
