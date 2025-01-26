@@ -14,6 +14,7 @@ select = ["ALL"]
 ignore = [
     "D100",  # missing docstring in public module
     "D104",  # missing docstring in public package
+    "D107",  # missing docstring in public init method
     "D203",  # missing 1 blank line before docstring
     "D204",  # missing 1 blank line after docstring
     "D213",  # multiline docstring should start on second line
