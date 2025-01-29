@@ -28,8 +28,8 @@ jobs:
     - name: Git Pull
       run: |
         cd ${{ github.workspace }}
-        ssh-keyscan -t rsa $SSH_HOST >> ~/.ssh/known_hosts
-        ssh $SSH_USER@$SSH_HOST "cd $APP_DIR pp && git pull origin master"
+        ssh-keyscan -t rsa ${{SSH_HOST}} >> ~/.ssh/known_hosts
+        ssh ${{SSH_USER}}@{{$SSH_HOST}} "cd ${{APP_DIR}} pp && git pull origin master"
         echo "Successfully pulled repo."
 
     - name: deploy to linode
