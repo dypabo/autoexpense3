@@ -28,17 +28,17 @@ jobs:
     - name: Git Pull
       run: |
         cd ${{ github.workspace }}
-        ssh-keyscan -t rsa 192.53.123.44 >> ~/.ssh/known_hosts
-        ssh root@192.53.123.44 "cd /app && git pull origin master"
+        ssh-keyscan -t rsa $SSH_HOST >> ~/.ssh/known_hosts
+        ssh $SSH_USER@$SSH_HOST "cd $APP_DIR pp && git pull origin master"
         echo "Successfully pulled repo."
 
     - name: deploy to linode
       run: |
-        ssh root@192.53.123.44 rm -rf /app
-        ssh root@192.53.123.44 git clone git@github.com:dypabo/autoexpense3.git /app
-        ssh root@192.53.123.44 "cd /app ; git checkout master ; git pull ;"
+        ssh $SSH_USER@$SSH_HOST rm -rf $APP_DIR
+        ssh $SSH_USER@$SSH_HOST git clone git@github.com:dypabo/autoexpense3.git $APP_DIR
+        ssh $SSH_USER@$SSH_HOST "cd $APP_DIR ; git checkout master ; git pull ;"
         # systemd
-        ssh root@192.53.123.44 cp /app/scripts/autoexpense_webapp.service /etc/systemd/system/
-        ssh root@192.53.123.44 systemctl daemon-reload
-        ssh root@192.53.123.44 systemctl enable autoexpense_webapp.service
-        ssh root@192.53.123.44 systemctl restart autoexpense_webapp.service
+        ssh $SSH_USER@$SSH_HOST cp $APP_DIR/scripts/autoexpense_webapp.service /etc/systemd/system/
+        ssh $SSH_USER@$SSH_HOST systemctl daemon-reload
+        ssh $SSH_USER@$SSH_HOST systemctl enable autoexpense_webapp.service
+        ssh $SSH_USER@$SSH_HOST systemctl restart autoexpense_webapp.service
