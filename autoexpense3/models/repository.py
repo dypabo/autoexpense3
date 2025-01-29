@@ -23,7 +23,7 @@ class Repository(ABC):
 
 
 class RepositoryDict(Repository):
-    """Repository implementation with a dictionnary."""
+    """Repository implementation with a dictionary."""
 
     def __init__(self) -> None:
         self._data: RepoDataDict = {

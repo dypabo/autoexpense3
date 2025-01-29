@@ -10,6 +10,15 @@ repos:
   - id: check-merge-conflict
   - id: check-added-large-files
     args: ['--maxkb=2000']
+- repo: https://github.com/codespell-project/codespell
+  rev: "v2.4.1"
+  hooks:
+  - id: codespell
+    name: codespell
+    description: Checks for common misspellings in text files.
+    entry: codespell
+    language: python
+    args: ['--skip=uv.lock']
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: 'v0.9.3'
   hooks:
