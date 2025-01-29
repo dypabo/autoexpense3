@@ -1,0 +1,45 @@
+name: Makefile CI
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+
+jobs:
+  build:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: install uv
+      run: pip install uv
+
+    - name: run tests
+      run: uv run make test
+
+    - name: Configure SSH
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_LINODE}}
+
+    - name: Git Pull
+      run: |
+        cd ${{ github.workspace }}
+        ssh-keyscan -t rsa ${{ vars.SSH_HOST }} >> ~/.ssh/known_hosts
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.APP_DIRECTORY }} && git pull origin master"
+        echo "Successfully pulled repo."
+
+    - name: deploy to linode
+      run: |
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} rm -rf ${{ vars.APP_DIRECTORY }}
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} git clone git@github.com:dypabo/autoexpense3.git ${{ vars.APP_DIRECTORY }}
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.APP_DIRECTORY }} ; git checkout master ; git pull ;"
+        # systemd
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} cp ${{ vars.APP_DIRECTORY }}/scripts/autoexpense_webapp.service /etc/systemd/system/
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl daemon-reload
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl enable autoexpense_webapp.service
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl restart autoexpense_webapp.service
+        echo "Successfully deployed."
