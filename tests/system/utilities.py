@@ -28,9 +28,9 @@ def get_webpage_expenses(html: str) -> list[Expense]:
 
     def build_expense(expense_html: str) -> Expense:
         date = datetime.strptime(
-            _get_first_tag(expense_html, "h3").text, "%Y-%m-%d"
+            _get_first_tag(expense_html, ".expense .date").text, "%Y-%m-%d"
         ).astimezone(UTC)
-        total = float(_get_first_tag(expense_html, "h4").text.strip("$"))
+        total = float(_get_first_tag(expense_html, ".expense .total").text.strip("$"))
         return Expense(date, total)
 
     expenses = _get_tags(html, ".expense")
