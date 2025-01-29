@@ -29,8 +29,16 @@ jobs:
       run: |
         cd ${{ github.workspace }}
         ssh-keyscan -t rsa 192.53.123.44 >> ~/.ssh/known_hosts
-        ssh root@192.53.123.44 "cd /app/autoexpense3 && git pull origin master"
+        ssh root@192.53.123.44 "cd /app && git pull origin master"
         echo "Successfully pulled repo."
 
     - name: deploy to linode
-      run: uv run make deploy
+      run: |
+        ssh root@192.53.123.44 rm -rf /app
+        ssh root@192.53.123.44 git clone git@github.com:dypabo/autoexpense3.git /app
+        ssh root@192.53.123.44 "cd /app ; git checkout master ; git pull ;"
+        # systemd
+        ssh root@192.53.123.44 cp /app/scripts/autoexpense_webapp.service /etc/systemd/system/
+        ssh root@192.53.123.44 systemctl daemon-reload
+        ssh root@192.53.123.44 systemctl enable autoexpense_webapp.service
+        ssh root@192.53.123.44 systemctl restart autoexpense_webapp.service
