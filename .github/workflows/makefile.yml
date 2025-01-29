@@ -36,7 +36,7 @@ jobs:
       run: |
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} rm -rf ${{ vars.APP_DIR }}
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} git clone git@github.com:dypabo/autoexpense3.git ${{ vars.APP_DIR }}
-        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ APP_DIR }} ; git checkout master ; git pull ;"
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.APP_DIR }} ; git checkout master ; git pull ;"
         # systemd
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} cp ${{ vars.APP_DIR }}/scripts/autoexpense_webapp.service /etc/systemd/system/
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl daemon-reload
