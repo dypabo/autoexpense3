@@ -42,3 +42,4 @@ jobs:
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl daemon-reload
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl enable autoexpense_webapp.service
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} systemctl restart autoexpense_webapp.service
+        echo "Successfully deployed."
