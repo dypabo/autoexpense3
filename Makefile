@@ -25,11 +25,11 @@ test-coverage:
 	uv run pytest tests autoexpense3  --cov
 
 deploy:
-	ssh autoexpense rm -rf /app
-	ssh autoexpense git clone git@github.com:dypabo/autoexpense3.git /app
-	ssh autoexpense "cd /app ; git checkout master ; git pull ;"
+	ssh root@192.53.123.44 rm -rf /app
+	ssh root@192.53.123.44 git clone git@github.com:dypabo/autoexpense3.git /app
+	ssh root@192.53.123.44 "cd /app ; git checkout master ; git pull ;"
 	# systemd
-	ssh autoexpense cp /app/scripts/autoexpense_webapp.service /etc/systemd/system/
-	ssh autoexpense systemctl daemon-reload
-	ssh autoexpense systemctl enable autoexpense_webapp.service
-	ssh autoexpense systemctl restart autoexpense_webapp.service
+	ssh root@192.53.123.44 cp /app/scripts/autoexpense_webapp.service /etc/systemd/system/
+	ssh root@192.53.123.44 systemctl daemon-reload
+	ssh root@192.53.123.44 systemctl enable autoexpense_webapp.service
+	ssh root@192.53.123.44 systemctl restart autoexpense_webapp.service
