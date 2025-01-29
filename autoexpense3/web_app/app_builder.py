@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment
+from jinja2 import FileSystemLoader
 
 from autoexpense3.models.repository import Repository
 from autoexpense3.web_app.application import Application

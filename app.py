@@ -1,4 +1,5 @@
-from datetime import UTC, datetime
+from datetime import UTC
+from datetime import datetime
 
 from autoexpense3.models.expense import Expense
 from autoexpense3.models.repository import RepositoryDict

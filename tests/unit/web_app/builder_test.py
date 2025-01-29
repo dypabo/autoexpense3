@@ -1,4 +1,5 @@
-from datetime import UTC, datetime
+from datetime import UTC
+from datetime import datetime
 
 import pytest
 import requests
@@ -9,7 +10,8 @@ from autoexpense3.models.repository import RepositoryDict
 from autoexpense3.web_app.app_builder import make_application
 from autoexpense3.web_app.application import Application
 from autoexpense3.web_app.constants import APP_NAME
-from tests.system.utilities import get_webpage_expenses, get_webpage_title
+from tests.system.utilities import get_webpage_expenses
+from tests.system.utilities import get_webpage_title
 
 
 @pytest.fixture

@@ -19,6 +19,12 @@ repos:
     entry: codespell
     language: python
     args: ['--skip=uv.lock']
+- repo: https://github.com/pycqa/isort
+  rev: 6.0.0
+  hooks:
+  - id: isort
+    name: isort (python)
+    args: ['--force-single-line-imports']
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: 'v0.9.3'
   hooks:
