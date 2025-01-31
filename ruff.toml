@@ -35,3 +35,8 @@ unfixable = []
     "D102",  # missing docstring in public method
     "D103",  # missing docstring in public function
 ]
+"**/conftest.py" = [
+    "S101",  # assert
+    "D102",  # missing docstring in public method
+    "D103",  # missing docstring in public function
+]
