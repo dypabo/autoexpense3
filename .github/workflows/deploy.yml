@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: install uv
+      run: pip install uv
+
+    - name: run tests
+      run: uv run make test
+
+    - name: Configure SSH
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_FOR_LINODE}}
+
+    - name: Deploy
+      run: |
+        cd ${{ github.workspace }}
+        ssh-keyscan -t rsa ${{ vars.SSH_HOST }} >> ~/.ssh/known_hosts
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.APP_DIRECTORY }} && git pull --rebase origin master"
+        echo "Successfully pulled repo."
+
+    - name: Restarting autoexpense webapp service
+      run: |
+        echo "restaring autoexpense_webapp SystemD Service"
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} cp ${{ vars.APP_DIRECTORY }}/scripts/autoexpense_webapp.service /etc/systemd/system/ && \
+         systemctl daemon-reload && \
+         systemctl enable autoexpense_webapp.service && \
+         systemctl restart autoexpense_webapp.service
+        echo "Successfully restarted."
