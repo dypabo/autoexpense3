@@ -18,10 +18,10 @@ pylint:
 test:
 	uv run pytest tests/unit autoexpense3
 
-test-system: test
+test-system:
 	uv run pytest ./tests/system
 
-test-deployment: test-system
+test-deployment: test test-system
 	uv run pytest ./tests/deployed_server
 
 test-coverage:

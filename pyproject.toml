@@ -16,6 +16,7 @@ dev = [
     "fastapi[standard]>=0.115.6",
     "mypy>=1.14.1",
     "pre-commit>=4.1.0",
+    "psutil>=6.1.1",
     "pylint>=3.3.3",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
