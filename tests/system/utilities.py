@@ -9,7 +9,7 @@ from autoexpense3.models.expense import Expense
 
 def _get_tags(html: str | Tag, tag: str) -> list[Tag]:
     if isinstance(html, str):
-        html = BeautifulSoup(html)
+        html = BeautifulSoup(html, features="html.parser")
     tags = html.select(tag)
     return list(tags)
 
