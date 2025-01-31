@@ -1,14 +1,12 @@
-name: Makefile CI
+name: Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types: [closed]
 
 jobs:
-  build:
-    if: ${{ github.event.pull_request.merged }}
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
