@@ -34,3 +34,6 @@ jobs:
       run: |
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} /app/scripts/restart.sh
         echo "Successfully restarted."
+
+    - name: run tests
+      run: uv run make test-system:
