@@ -32,9 +32,5 @@ jobs:
 
     - name: Restarting autoexpense webapp service
       run: |
-        echo "restaring autoexpense_webapp SystemD Service"
-        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} cp ${{ vars.APP_DIRECTORY }}/scripts/autoexpense_webapp.service /etc/systemd/system/ && \
-         systemctl daemon-reload && \
-         systemctl enable autoexpense_webapp.service && \
-         systemctl restart autoexpense_webapp.service
+        ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} /app/scripts/restart.sh
         echo "Successfully restarted."
