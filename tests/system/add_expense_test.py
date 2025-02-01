@@ -10,4 +10,4 @@ BUTTON = "new_expense_button"
 
 @pytest.mark.parametrize("field", [SELLER, DATE, TOTAL, BUTTON])
 def test_page_has_new_expense_form(homepage: Page, field: str) -> None:
-    expect(homepage.get_by_placeholder(field)).to_be_visible(timeout=0.1)
+    expect(homepage.locator(f"#{field}")).to_be_visible(timeout=1)

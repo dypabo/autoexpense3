@@ -15,10 +15,18 @@ from autoexpense3.web_app.application import Application
 def repository() -> RepositoryDict:
     repo = RepositoryDict()
     repo.add_expenses(
-        Expense(datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC), 60.00),
+        Expense(
+            datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
+            "gas station 123",
+            60.00,
+        ),
     )
     repo.add_expenses(
-        Expense(datetime.strptime("2025-01-25", "%Y-%m-%d").astimezone(UTC), 65.00),
+        Expense(
+            datetime.strptime("2025-01-25", "%Y-%m-%d").astimezone(UTC),
+            "gas station 321",
+            65.00,
+        ),
     )
     return repo
 

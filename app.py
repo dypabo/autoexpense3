@@ -8,9 +8,17 @@ from autoexpense3.web_app.app_builder import make_application
 application = make_application(RepositoryDict())
 
 application.repository.add_expenses(
-    Expense(datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC), 60.00),
+    Expense(
+        datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
+        "gas station 123",
+        60.00,
+    ),
 )
 application.repository.add_expenses(
-    Expense(datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC), 65.00),
+    Expense(
+        datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
+        "gas station 321",
+        65.00,
+    ),
 )
 app = application.fastapi

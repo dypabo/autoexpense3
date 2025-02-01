@@ -31,8 +31,9 @@ def get_webpage_expenses(html: str) -> list[Expense]:
         date = datetime.strptime(
             _get_first_tag(expense_html, ".expense .date").text, "%Y-%m-%d"
         ).astimezone(UTC)
+        seller = _get_first_tag(expense_html, ".expense .seller").text
         total = float(_get_first_tag(expense_html, ".expense .total").text.strip("$"))
-        return Expense(date, total)
+        return Expense(date, seller, total)
 
     expenses = _get_tags(html, ".expense")
     return [build_expense(str(t)) for t in expenses]

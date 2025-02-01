@@ -2,14 +2,23 @@
 {% block content %}
 <div class="container-md">
   <table class="table table-striped">
-    <tr><th>date</th><th>supplier</th><th>total</th></tr>
+<tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
     {% for expense in expenses %}
     <tr class="expense">
       <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
-      <td class="supplier">gas station xyz </td>
+      <td class="seller">{{ expense.seller}}</td>
       <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
+      <td>&nbsp;</td>
     </tr>
     {% endfor %}
+    <tr class="new_expense">
+      <form action="/new_expense">
+        <td><input id="new_expense_date" value="{{ today.strftime('%Y-%m-%d') }}"</td>
+        <td><input id="new_expense_seller" placeholder="seller"\></td>
+        <td><input id="new_expense_total" placeholder="total"\></td>
+        <td><button id="new_expense_button"></td>
+      </form>
+    </tr>
   </table>
 </div>
 {% endblock %}

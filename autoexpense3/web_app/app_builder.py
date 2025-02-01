@@ -1,3 +1,6 @@
+from datetime import UTC
+from datetime import datetime
+
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
@@ -23,7 +26,11 @@ def homepage(request: Request) -> HTMLResponse:
     expenses = []
     if application is not None:
         expenses = application.repository.get_expenses()
-    rendered_template = homepage_template.render(app_name=APP_NAME, expenses=expenses)
+    rendered_template = homepage_template.render(
+        app_name=APP_NAME,
+        expenses=expenses,
+        today=datetime.now(tz=UTC),
+    )
     return HTMLResponse(rendered_template)
 
 

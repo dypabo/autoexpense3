@@ -12,6 +12,7 @@ class Expense:
     """Representation of an basic expense."""
 
     timestamp: datetime
+    seller: str
     # TODO(Jason): replace py proper type for money
     # https://github.com/dypabo/autoexpense3/issues/1
     total: float
