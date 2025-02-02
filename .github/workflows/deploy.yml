@@ -15,8 +15,7 @@ jobs:
     - name: install dependencies
       run: |
         pip install uv
-        uv run playwright install-deps
-        uv run playwright install
+        uv run playwright install --with-deps
 
     - name: run tests
       run: uv run make test
