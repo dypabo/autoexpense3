@@ -13,10 +13,10 @@
       </thead>
       <tbody>
         <tr class="new_expense">
-          <td><input name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
-          <td><input name="new_expense_seller" class="form-control" placeholder="seller"\></td>
-          <td><input name="new_expense_total" class="form-control" placeholder="total"\></td>
-          <td><button type="submit" form="new_expense_form" class="btn btn-primary">Add</button></td>
+          <td><input id="new_expense_date" name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
+          <td><input id="new_expense_seller" name="new_expense_seller" class="form-control" placeholder="seller"\></td>
+          <td><input id="new_expense_total" name="new_expense_total" class="form-control" placeholder="total"\></td>
+          <td><button id="new_expense_button" type="submit" form="new_expense_form" class="btn btn-primary">Add</button></td>
         </tr>
       </tbody>
     </table>
