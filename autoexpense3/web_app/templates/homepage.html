@@ -1,42 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-md">
-  <table class="table table-striped">
-<tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
-    {% for expense in expenses %}
-    <tr class="expense">
-      <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
-      <td class="seller">{{ expense.seller}}</td>
-      <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
-      <td>&nbsp;</td>
-    </tr>
-    {% endfor %}
-<script>
-function add_expense() {
-  var date = document.getElementById("new_expense_date").value;
-  var seller = document.getElementById("new_expense_seller").value;
-  var total = document.getElementById("new_expense_total").value;
-  var formdata = new FormData();
-  formdata.append('new_expense_date', new_expense_date);
-  formdata.append('new_expense_seller', new_expense_seller);
-  formdata.append('new_expense_total', new_expense_total);
-  fetch('/new_expense', {
-    method: 'POST',
-    body: formdata
-  })
-  //.then(response => response.json())
-  //.catch(error => {
-  //  console.error(error);
-  //}
-
-}
-</script>
-      <tr class="new_expense">
-        <td><input id="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"</td>
-        <td><input id="new_expense_seller" class="form-control" placeholder="seller"\></td>
-        <td><input id="new_expense_total" class="form-control" placeholder="total"\></td>
-        <td><input id="new_expense_button" class="btn btn-primary" type="button", onclick="add_expense()" value="Add"></td>
-      </tr>
-  </table>
+  <form
+      hx-post="/new_expense"
+      id="new_expense_form"
+      hx-target="#expenses"
+      hx-swap="beforeend"
+      hx-on:htmx:after-request="this.reset()">
+    <table class="table table-striped">
+      <thead>
+        <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+      </thead>
+      <tbody>
+        <tr class="new_expense">
+          <td><input name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
+          <td><input name="new_expense_seller" class="form-control" placeholder="seller"\></td>
+          <td><input name="new_expense_total" class="form-control" placeholder="total"\></td>
+          <td><button type="submit" form="new_expense_form" class="btn btn-primary">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
 </div>
+<div class="container-md">
+  <table class="table table-striped">
+    <thead>
+      <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+    </thead>
+    <tbody id="expenses">
+      {% for expense in expenses %}
+      <tr class="expense">
+        <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
+        <td class="seller">{{ expense.seller}}</td>
+        <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
+        <td>&nbsp;</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
 {% endblock %}

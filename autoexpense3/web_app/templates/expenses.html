@@ -1,0 +1,6 @@
+<tr class="expense">
+  <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
+  <td class="seller">{{ expense.seller}}</td>
+  <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
+  <td>&nbsp;</td>
+</tr>
