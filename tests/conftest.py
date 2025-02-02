@@ -14,14 +14,14 @@ from autoexpense3.web_app.application import Application
 @pytest.fixture
 def repository() -> RepositoryDict:
     repo = RepositoryDict()
-    repo.add_expenses(
+    repo.add_expense(
         Expense(
             datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
             "gas station 123",
             60.00,
         ),
     )
-    repo.add_expenses(
+    repo.add_expense(
         Expense(
             datetime.strptime("2025-01-25", "%Y-%m-%d").astimezone(UTC),
             "gas station 321",

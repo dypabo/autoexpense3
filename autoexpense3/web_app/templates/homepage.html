@@ -11,14 +11,32 @@
       <td>&nbsp;</td>
     </tr>
     {% endfor %}
-    <tr class="new_expense">
-      <form action="/new_expense">
-        <td><input id="new_expense_date" value="{{ today.strftime('%Y-%m-%d') }}"</td>
-        <td><input id="new_expense_seller" placeholder="seller"\></td>
-        <td><input id="new_expense_total" placeholder="total"\></td>
-        <td><button id="new_expense_button"></td>
-      </form>
-    </tr>
+<script>
+function add_expense() {
+  var date = document.getElementById("new_expense_date").value;
+  var seller = document.getElementById("new_expense_seller").value;
+  var total = document.getElementById("new_expense_total").value;
+  var formdata = new FormData();
+  formdata.append('new_expense_date', new_expense_date);
+  formdata.append('new_expense_seller', new_expense_seller);
+  formdata.append('new_expense_total', new_expense_total);
+  fetch('/new_expense', {
+    method: 'POST',
+    body: formdata
+  })
+  //.then(response => response.json())
+  //.catch(error => {
+  //  console.error(error);
+  //}
+
+}
+</script>
+      <tr class="new_expense">
+        <td><input id="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"</td>
+        <td><input id="new_expense_seller" class="form-control" placeholder="seller"\></td>
+        <td><input id="new_expense_total" class="form-control" placeholder="total"\></td>
+        <td><input id="new_expense_button" class="btn btn-primary" type="button", onclick="add_expense()" value="Add"></td>
+      </tr>
   </table>
 </div>
 {% endblock %}

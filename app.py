@@ -7,14 +7,14 @@ from autoexpense3.web_app.app_builder import make_application
 
 application = make_application(RepositoryDict())
 
-application.repository.add_expenses(
+application.repository.add_expense(
     Expense(
         datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
         "gas station 123",
         60.00,
     ),
 )
-application.repository.add_expenses(
+application.repository.add_expense(
     Expense(
         datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
         "gas station 321",
