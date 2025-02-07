@@ -7,6 +7,7 @@ from fastapi.responses import HTMLResponse
 
 from autoexpense3.web_app.application import Application
 from autoexpense3.web_app.constants import APP_NAME
+from autoexpense3.web_app.constants import APP_URL
 
 
 def build_webpage_router(application: Application) -> APIRouter:
@@ -19,6 +20,7 @@ def build_webpage_router(application: Application) -> APIRouter:
         expenses = application.repository.get_expenses()
         context = {
             "app_name": APP_NAME,
+            "app_url": APP_URL,
             "expenses": expenses,
             "today": datetime.now(tz=UTC),
         }
