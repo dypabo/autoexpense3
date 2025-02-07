@@ -1,11 +1,14 @@
 import subprocess  # noqa: S404
 import time
 from collections.abc import Generator
+from os import environ
 from pathlib import Path
 
 import psutil
 import pytest
 from playwright.sync_api import Page
+
+from autoexpense3.web_app.constants import APP_URL
 
 
 def kill_process_and_children(pid: int) -> None:
@@ -26,5 +29,8 @@ def web_application() -> Generator[None, None, None]:
 
 @pytest.fixture
 def homepage(page: Page) -> Page:
-    page.goto("http://127.0.0.1:8000")
+    if environ.get("PYTEST_VERSION") is not None:
+        page.goto("http://127.0.0.1:8000")
+    else:
+        page.goto(APP_URL)
     return page
