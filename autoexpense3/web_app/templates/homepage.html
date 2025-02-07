@@ -2,8 +2,8 @@
 {% block content %}
 <div class="container-md">
   <form
-      hx-push-url="true"
       hx-post="/expenses"
+      hx-headers='{"Upgrade-Insecure-Requests": 1}'
       id="new_expense_form"
       hx-target="#expenses"
       hx-swap="beforeend"
