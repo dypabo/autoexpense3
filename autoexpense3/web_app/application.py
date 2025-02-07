@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from fastapi import FastAPI
+from fastapi.templating import Jinja2Templates
 
 from autoexpense3.models.repository import Repository
 
@@ -9,5 +10,6 @@ from autoexpense3.models.repository import Repository
 class Application:
     """Application components."""
 
-    fastapi: FastAPI
+    app: FastAPI
     repository: Repository
+    templates: Jinja2Templates
