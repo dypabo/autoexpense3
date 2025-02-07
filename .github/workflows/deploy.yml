@@ -38,4 +38,6 @@ jobs:
         echo "Successfully restarted."
 
     - name: run tests
+      env:
+        GITHUB: 1
       run: uv run make test-deployment

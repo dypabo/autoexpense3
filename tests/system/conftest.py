@@ -28,9 +28,13 @@ def web_application() -> Generator[None, None, None]:
 
 
 @pytest.fixture
-def homepage(page: Page) -> Page:
-    if environ.get("PYTEST_VERSION") is not None:
-        page.goto("http://127.0.0.1:8000")
-    else:
-        page.goto(APP_URL)
+def url() -> str:
+    if environ.get("GITHUB"):
+        return APP_URL
+    return "http://127.0.0.1:8000"
+
+
+@pytest.fixture
+def homepage(page: Page, url: str) -> Page:
+    page.goto(url)
     return page
