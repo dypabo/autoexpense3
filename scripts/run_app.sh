@@ -7,4 +7,4 @@ env
 echo "Starting autoexpense webapp..."
 
 cd /app
-/root/.local/bin/uv run fastapi run app.py --port 80
+/root/.local/bin/uv run fastapi run app.py --port 8080
