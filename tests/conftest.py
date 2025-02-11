@@ -14,6 +14,17 @@ from tests.deployed_stagging.add_expense_test import DATE_FORMAT
 fake = Faker()
 
 
+def build_expense() -> Expense:
+    return Expense(
+        uuid=uuid4(),
+        timestamp=datetime.strptime(
+            fake.date(pattern=DATE_FORMAT), DATE_FORMAT
+        ).replace(tzinfo=UTC),
+        seller=fake.name(),
+        total=float(fake.pricetag().replace(",", "").strip("$")),
+    )
+
+
 @pytest.fixture
 def application() -> Application:
     return _application
@@ -32,11 +43,9 @@ def homepage_content(client: TestClient) -> str:
 
 @pytest.fixture
 def expense() -> Expense:
-    return Expense(
-        uuid=uuid4(),
-        timestamp=datetime.strptime(
-            fake.date(pattern=DATE_FORMAT), DATE_FORMAT
-        ).replace(tzinfo=UTC),
-        seller=fake.name(),
-        total=float(fake.pricetag().replace(",", "").strip("$")),
-    )
+    return build_expense()
+
+
+@pytest.fixture
+def expense2() -> Expense:
+    return build_expense()
