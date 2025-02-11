@@ -22,6 +22,10 @@ class Repository(ABC):
     def add_expense(self, expense: Expense) -> None:
         """Add expense to the repository."""
 
+    @abstractmethod
+    def remove_expense(self, expense: Expense) -> None:
+        """Remove expense to the repository."""
+
 
 class RepositoryDict(Repository):
     """Repository implementation with a dictionary."""
@@ -38,6 +42,10 @@ class RepositoryDict(Repository):
     def add_expense(self, expense: Expense) -> None:
         """Add expense to the repository."""
         self._data["expenses"].append(expense)
+
+    def remove_expense(self, expense: Expense) -> None:
+        """Remove expense to the repository."""
+        self._data["expenses"].remove(expense)
 
     def __repr__(self) -> str:
         """Return string representation of the RepositoryDict instance."""
