@@ -1,6 +1,7 @@
 from abc import ABC
 from abc import abstractmethod
 from typing import TypedDict
+from uuid import UUID
 
 from autoexpense3.models.expense import Expense
 
@@ -23,7 +24,7 @@ class Repository(ABC):
         """Add expense to the repository."""
 
     @abstractmethod
-    def remove_expense(self, expense: Expense) -> None:
+    def remove_expense(self, uuid: UUID) -> None:
         """Remove expense to the repository."""
 
 
@@ -43,8 +44,10 @@ class RepositoryDict(Repository):
         """Add expense to the repository."""
         self._data["expenses"].append(expense)
 
-    def remove_expense(self, expense: Expense) -> None:
+    def remove_expense(self, uuid: UUID) -> None:
         """Remove expense to the repository."""
+        expenses = [e for e in self._data["expenses"] if e.uuid == uuid]
+        expense = expenses[0]
         self._data["expenses"].remove(expense)
 
     def __repr__(self) -> str:

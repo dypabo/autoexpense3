@@ -26,7 +26,9 @@ def build_expense() -> Expense:
 
 
 @pytest.fixture
-def application() -> Application:
+def application(expense: Expense, expense2: Expense) -> Application:
+    _application.repository.add_expense(expense)
+    _application.repository.add_expense(expense2)
     return _application
 
 

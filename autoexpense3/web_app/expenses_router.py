@@ -49,6 +49,14 @@ def build_expenses_router(application: Application) -> APIRouter:
             request=request, name="expenses.html", context={"expense": expense}
         )
 
+    @expenses_router.delete("/{uuid}")
+    def remove_expense(
+        uuid: UUID,
+    ) -> Response:
+        application.repository.remove_expense(uuid)
+        return Response()
+
     _ = expenses
     _ = new_expense
+    _ = remove_expense
     return expenses_router
