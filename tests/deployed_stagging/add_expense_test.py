@@ -20,17 +20,6 @@ DATE_FORMAT = "%Y-%m-%d"
 fake = Faker()
 
 
-@pytest.fixture
-def expense() -> Expense:
-    return Expense(
-        datetime.strptime(fake.date(pattern=DATE_FORMAT), DATE_FORMAT).replace(
-            tzinfo=UTC
-        ),
-        fake.name(),
-        float(fake.pricetag().replace(",", "").strip("$")),
-    )
-
-
 @pytest.mark.parametrize("field", [SELLER, DATE, TOTAL, BUTTON])
 def test_page_has_new_expense_form(homepage: Page, field: str) -> None:
     expect(homepage.locator(f"#{field}")).to_be_visible(timeout=1)
