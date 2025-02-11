@@ -1,5 +1,6 @@
 from datetime import UTC
 from datetime import datetime
+from uuid import uuid4
 
 import pytest
 from faker import Faker
@@ -32,9 +33,10 @@ def homepage_content(client: TestClient) -> str:
 @pytest.fixture
 def expense() -> Expense:
     return Expense(
-        datetime.strptime(fake.date(pattern=DATE_FORMAT), DATE_FORMAT).replace(
-            tzinfo=UTC
-        ),
-        fake.name(),
-        float(fake.pricetag().replace(",", "").strip("$")),
+        uuid=uuid4(),
+        timestamp=datetime.strptime(
+            fake.date(pattern=DATE_FORMAT), DATE_FORMAT
+        ).replace(tzinfo=UTC),
+        seller=fake.name(),
+        total=float(fake.pricetag().replace(",", "").strip("$")),
     )

@@ -1,5 +1,6 @@
 from datetime import UTC
 from datetime import datetime
+from uuid import UUID
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -28,12 +29,13 @@ def get_webpage_expenses(html: str) -> list[Expense]:
     """Return the list of `expense`."""
 
     def build_expense(expense_html: str) -> Expense:
+        uuid = UUID(_get_first_tag(expense_html, ".expense .uuid").text)
         date = datetime.strptime(
             _get_first_tag(expense_html, ".expense .date").text, "%Y-%m-%d"
         ).astimezone(UTC)
         seller = _get_first_tag(expense_html, ".expense .seller").text
         total = float(_get_first_tag(expense_html, ".expense .total").text.strip("$"))
-        return Expense(date, seller, total)
+        return Expense(uuid, date, seller, total)
 
     expenses = _get_tags(html, ".expense")
     return [build_expense(str(t)) for t in expenses]

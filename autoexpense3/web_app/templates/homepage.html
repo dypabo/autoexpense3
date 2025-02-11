@@ -10,10 +10,11 @@
       hx-on:htmx:after-request="this.reset()">
     <table class="table table-striped">
       <thead>
-        <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+        <tr><th>id</th><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
       </thead>
       <tbody>
         <tr class="new_expense">
+          <td><input id="new_expense_uuid" name="new_expense_uuid" class="form-control" value="tbd"\></td>
           <td><input id="new_expense_date" name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
           <td><input id="new_expense_seller" name="new_expense_seller" class="form-control" placeholder="seller"\></td>
           <td><input id="new_expense_total" name="new_expense_total" class="form-control" placeholder="total"\></td>
@@ -26,11 +27,12 @@
 <div class="container-md">
   <table class="table table-striped">
     <thead>
-      <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+      <tr><th>id</th><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
     </thead>
     <tbody id="expenses">
       {% for expense in expenses %}
       <tr class="expense">
+        <td class="uuid">{{ expense.uuid }}</td>
         <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
         <td class="seller">{{ expense.seller}}</td>
         <td class="total">{{ "%.02f" |format(expense.total) }}$</td>

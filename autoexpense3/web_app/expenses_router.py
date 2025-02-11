@@ -1,6 +1,7 @@
 from datetime import UTC
 from datetime import datetime
 from typing import Annotated
+from uuid import UUID
 
 from fastapi import Form
 from fastapi import Header
@@ -30,6 +31,7 @@ def build_expenses_router(application: Application) -> APIRouter:
     @expenses_router.post("/")
     def new_expense(
         request: Request,
+        new_expense_uuid: Annotated[str, Form()],
         new_expense_date: Annotated[str, Form()],
         new_expense_seller: Annotated[str, Form()],
         new_expense_total: Annotated[float, Form()],
@@ -37,6 +39,7 @@ def build_expenses_router(application: Application) -> APIRouter:
         """Add new expense endpoint."""
         date = f"{new_expense_date}:{UTC}"
         expense = Expense(
+            UUID(new_expense_uuid),
             datetime.strptime(date, "%Y-%m-%d:%Z").replace(tzinfo=UTC),
             new_expense_seller,
             new_expense_total,

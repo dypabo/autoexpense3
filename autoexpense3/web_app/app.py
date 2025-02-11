@@ -1,6 +1,7 @@
 from datetime import UTC
 from datetime import datetime
 from os import environ
+from uuid import uuid4
 
 from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
@@ -18,6 +19,7 @@ _repository = RepositoryDict()
 if environ.get("PYTEST_VERSION") is not None:
     _repository.add_expense(
         Expense(
+            uuid4(),
             datetime.strptime("2026-01-24", "%Y-%m-%d").astimezone(UTC),
             "gas station 123",
             60.00,
@@ -25,6 +27,7 @@ if environ.get("PYTEST_VERSION") is not None:
     )
     _repository.add_expense(
         Expense(
+            uuid4(),
             datetime.strptime("2026-01-24", "%Y-%m-%d").astimezone(UTC),
             "gas station 321",
             65.00,
@@ -33,6 +36,7 @@ if environ.get("PYTEST_VERSION") is not None:
 else:
     _repository.add_expense(
         Expense(
+            uuid4(),
             datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
             "gas station 123",
             60.00,
@@ -40,6 +44,7 @@ else:
     )
     _repository.add_expense(
         Expense(
+            uuid4(),
             datetime.strptime("2025-01-24", "%Y-%m-%d").astimezone(UTC),
             "gas station 321",
             65.00,

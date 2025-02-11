@@ -1,5 +1,6 @@
 from datetime import UTC
 from datetime import datetime
+from uuid import UUID
 
 import pytest
 from faker import Faker
@@ -33,14 +34,16 @@ def add_expense_to_page(page: Page, expense: Expense) -> None:
 
 
 def build_expense_from_expense_line(expense: Locator) -> Expense:
+    uuid_str = expense.locator(".uuid").first.text_content()
     date_str = expense.locator(".date").first.text_content()
     total_str = expense.locator(".total").first.text_content()
     seller_str = expense.locator(".seller").first.text_content()
-    if date_str is None or total_str is None or seller_str is None:
+    if uuid_str is None or date_str is None or total_str is None or seller_str is None:
         raise ValueError
+    uuid = UUID(uuid_str)
     date = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=UTC)
     total = float(total_str.strip("$"))
-    return Expense(timestamp=date, seller=seller_str, total=total)
+    return Expense(uuid=uuid, timestamp=date, seller=seller_str, total=total)
 
 
 def delete_expense_in_page(page: Page, expense: Expense) -> None:
