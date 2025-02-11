@@ -2,8 +2,8 @@ from fastapi.testclient import TestClient
 
 from autoexpense3.web_app.application import Application
 from autoexpense3.web_app.constants import APP_NAME
-from tests.system.utilities import get_webpage_expenses
-from tests.system.utilities import get_webpage_title
+from tests.deployed_stagging.utilities import get_webpage_expenses
+from tests.deployed_stagging.utilities import get_webpage_title
 
 
 def test_homepage_response_code_is_ok(client: TestClient) -> None:

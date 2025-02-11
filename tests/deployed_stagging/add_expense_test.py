@@ -54,6 +54,14 @@ def build_expense_from_expense_line(expense: Locator) -> Expense:
     return Expense(timestamp=date, seller=seller_str, total=total)
 
 
+def delete_expense_in_page(page: Page, expense: Expense) -> None:
+    for expense_line in page.locator(".expense").all():
+        current_expense = build_expense_from_expense_line(expense_line)
+        if current_expense == expense:
+            page.locator(".delete").first.click()
+    raise ValueError
+
+
 def get_expense_from_page(page: Page, expense: Expense) -> Expense:
     for expense_line in page.locator(".expense").all():
         current_expense = build_expense_from_expense_line(expense_line)
@@ -77,3 +85,14 @@ def test_added_expense_are_in_repository(
     add_expense_to_page(homepage, expense)
     assert homepage.locator(".expense").count() == number_of_expense + 1
     assert expense_in_page(homepage, expense)
+
+
+def test_deleted_expense_are_not_in_repository(
+    homepage: Page, application: Application, expense: Expense
+) -> None:
+    application.repository.add_expense(expense)
+    number_of_expense = len(application.repository.get_expenses())
+    homepage.reload()
+    delete_expense_in_page(homepage, expense)
+    assert homepage.locator(".expense").count() == number_of_expense - 1
+    assert not expense_in_page(homepage, expense)

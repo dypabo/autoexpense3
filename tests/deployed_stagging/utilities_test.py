@@ -1,4 +1,4 @@
-from tests.system.utilities import get_webpage_title
+from tests.deployed_stagging.utilities import get_webpage_title
 
 
 def test_get_title_extract() -> None:

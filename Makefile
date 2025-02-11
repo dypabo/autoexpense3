@@ -21,8 +21,11 @@ test:
 test-system:
 	uv run pytest ./tests/system
 
-test-deployment: test test-system
-	uv run pytest ./tests/deployed_server
+test-stagging: test test-system
+	uv run pytest ./tests/deployed_stagging
+
+test-production: test test-system
+	uv run pytest ./tests/deployed_production
 
 test-coverage:
 	uv run pytest tests autoexpense3  --cov
