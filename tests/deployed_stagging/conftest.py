@@ -4,18 +4,11 @@ from collections.abc import Generator
 from os import environ
 from pathlib import Path
 
-import psutil
 import pytest
 from playwright.sync_api import Page
 
 from autoexpense3.web_app.constants import APP_URL
-
-
-def kill_process_and_children(pid: int) -> None:
-    parent = psutil.Process(pid)
-    for child in parent.children(recursive=True):
-        child.kill()
-    parent.kill()
+from tests.utilities import kill_process_and_children
 
 
 @pytest.fixture(autouse=True, scope="session")
