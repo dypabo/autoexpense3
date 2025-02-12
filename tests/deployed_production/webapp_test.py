@@ -1,7 +1,7 @@
 from autoexpense3.web_app.constants import APP_NAME
 from autoexpense3.web_app.constants import APP_URL
-from tests.deployed_stagging.utilities import get_webpage_expenses
-from tests.deployed_stagging.utilities import get_webpage_title
+from tests.utilities_html import get_webpage_expenses
+from tests.utilities_html import get_webpage_title
 
 
 def test_homepage_url_is_https() -> None:
