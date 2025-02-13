@@ -9,10 +9,9 @@ if TYPE_CHECKING:
 
 
 @dataclass
-class Expense:
-    """Representation of an basic expense."""
+class ExpenseNoUuid:
+    """Representation of an basic expense without UUID."""
 
-    uuid: UUID
     timestamp: datetime
     seller: str
     # TODO(Jason): replace py proper type for money
@@ -26,3 +25,20 @@ class Expense:
             "seller": self.seller,
             "total": self.total,
         }
+
+
+@dataclass
+class Expense(ExpenseNoUuid):
+    """Representation of an basic expense."""
+
+    uuid: UUID
+
+    def jsonify(self) -> dict:
+        """Return a JSON representation of this instance."""
+        json = super().jsonify()
+        json["uuid"] = self.uuid
+        return json
+
+    def to_expense_without_uuid(self) -> ExpenseNoUuid:
+        """Return a ExpenseNoUuid object with data from self."""
+        return ExpenseNoUuid(self.timestamp, self.seller, self.total)
