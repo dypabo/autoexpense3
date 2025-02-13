@@ -40,4 +40,4 @@ jobs:
     - name: run tests
       env:
         GITHUB: 1
-      run: uv run make test-deployment
+      run: uv run make test-production

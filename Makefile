@@ -24,7 +24,7 @@ test-system:
 test-stagging:
 	uv run pytest ./tests/deployed_stagging
 
-test-production: test test-system
+test-production:
 	uv run pytest ./tests/deployed_production
 
 test-coverage:
