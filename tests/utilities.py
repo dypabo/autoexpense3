@@ -6,8 +6,8 @@ import psutil
 from faker import Faker
 
 from autoexpense3.models.expense import Expense
-from tests.deployed_stagging.add_expense_test import DATE_FORMAT
 
+DATE_FORMAT = "%Y-%m-%d"
 fake = Faker()
 
 

@@ -1,5 +1,5 @@
 <tr class="expense">
-  <td class="uuid">{{ str(expense.uuid) }}</td>
+  <td class="uuid">{{ expense.uuid.__str__() }}</td>
   <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
   <td class="seller">{{ expense.seller}}</td>
   <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
