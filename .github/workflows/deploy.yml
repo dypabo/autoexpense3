@@ -35,6 +35,7 @@ jobs:
     - name: Restarting autoexpense webapp service
       run: |
         ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} /app/scripts/restart.sh
+        sleep 5
         echo "Successfully restarted."
 
     - name: run tests
