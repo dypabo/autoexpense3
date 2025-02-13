@@ -21,7 +21,7 @@ test:
 test-system:
 	uv run pytest ./tests/system
 
-test-stagging: test test-system
+test-stagging:
 	uv run pytest ./tests/deployed_stagging
 
 test-production: test test-system
