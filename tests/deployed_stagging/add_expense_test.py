@@ -29,7 +29,6 @@ def test_page_has_new_expense_form(homepage: Page, field: str) -> None:
 
 
 def add_expense_to_page(page: Page, expense: Expense) -> None:
-    page.locator(f"#{UUID_CLASS}").fill(str(expense.uuid))
     page.locator(f"#{DATE}").fill(expense.timestamp.strftime(DATE_FORMAT))
     page.locator(f"#{SELLER}").fill(expense.seller)
     page.locator(f"#{TOTAL}").fill(str(expense.total))
