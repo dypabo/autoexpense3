@@ -1,0 +1,8 @@
+<tr class="expense">
+  <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
+  <td class="seller">{{ expense.seller}}</td>
+  <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
+  <td>
+    <button type="button" class="btn btn-outline-danger delete" hx-delete="/expenses/{{expense.uuid.__str__() }}" hx-target="closest tr" hx-swap="outerHTML swap:1s"><i class="bi bi-trash3"></i></button>
+  </td>
+</tr>

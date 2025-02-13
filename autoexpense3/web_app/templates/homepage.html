@@ -10,15 +10,15 @@
       hx-on:htmx:after-request="this.reset()">
     <table class="table table-striped">
       <thead>
-        <tr><th>id</th><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+        <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
       </thead>
       <tbody>
         <tr class="new_expense">
-          <td><input id="new_expense_uuid" name="new_expense_uuid" class="form-control" value="tbd"\></td>
+          <input id="new_expense_uuid" name="new_expense_uuid" class="form-control" value="tbd" style="display: none"\>
           <td><input id="new_expense_date" name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
           <td><input id="new_expense_seller" name="new_expense_seller" class="form-control" placeholder="seller"\></td>
           <td><input id="new_expense_total" name="new_expense_total" class="form-control" placeholder="total"\></td>
-          <td><button id="new_expense_button" type="submit" form="new_expense_form" class="btn btn-primary">Add</button></td>
+          <td><button id="new_expense_button" type="submit" form="new_expense_form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></button></td>
         </tr>
       </tbody>
     </table>
@@ -27,17 +27,11 @@
 <div class="container-md">
   <table class="table table-striped">
     <thead>
-      <tr><th>id</th><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
+      <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
     </thead>
     <tbody id="expenses">
       {% for expense in expenses %}
-      <tr class="expense">
-        <td class="uuid">{{ expense.uuid }}</td>
-        <td class="date">{{ expense.timestamp.strftime("%Y-%m-%d") }}</td>
-        <td class="seller">{{ expense.seller}}</td>
-        <td class="total">{{ "%.02f" |format(expense.total) }}$</td>
-        <td><button class="delete" hx-delete="/expenses/{{expense.uuid.__str__() }}" hx-target="closest tr" hx-swap="outerHTML swap:1s">DELETE </button></td>
-      </tr>
+        {% include "fragment_expenses.html" %}
       {% endfor %}
     </tbody>
   </table>

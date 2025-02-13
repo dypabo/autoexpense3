@@ -46,7 +46,7 @@ def build_expenses_router(application: Application) -> APIRouter:
         )
         application.repository.add_expense(expense)
         return application.templates.TemplateResponse(
-            request=request, name="expenses.html", context={"expense": expense}
+            request=request, name="fragment_expenses.html", context={"expense": expense}
         )
 
     @expenses_router.delete("/{uuid}")
