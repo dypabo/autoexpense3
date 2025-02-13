@@ -1,5 +1,6 @@
 from datetime import UTC
 from datetime import datetime
+from time import sleep
 from uuid import UUID
 
 import pytest
@@ -9,7 +10,6 @@ from playwright.sync_api import Page
 from playwright.sync_api import expect
 
 from autoexpense3.models.expense import Expense
-from autoexpense3.web_app.application import Application
 from tests.utilities import DATE_FORMAT
 from tests.utilities import build_expense
 
@@ -92,12 +92,12 @@ def test_added_expense_are_in_repository(homepage: Page) -> None:
     assert expense_in_page(homepage, expense)
 
 
-def test_deleted_expense_are_not_in_repository(
-    homepage: Page, application: Application, expense: Expense
-) -> None:
-    application.repository.add_expense(expense)
-    number_of_expense = len(application.repository.get_expenses())
-    homepage.reload()
+def test_deleted_expense_are_not_in_repository(homepage: Page) -> None:
+    expense = build_expense()
+    add_expense_to_page(homepage, expense)
+    number_of_expense = homepage.locator(".expense").count()
+    assert expense_in_page(homepage, expense)
     delete_expense_in_page(homepage, expense)
+    sleep(2)
     assert homepage.locator(".expense").count() == number_of_expense - 1
     assert not expense_in_page(homepage, expense)
