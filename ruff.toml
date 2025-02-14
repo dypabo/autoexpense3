@@ -17,8 +17,7 @@ ignore = [
     "D107",  # missing docstring in public init method
     "D203",  # missing 1 blank line before docstring
     "D204",  # missing 1 blank line after docstring
-    "D213",  # multiline docstring should start on second line
-    "I001",  # Import block is un-sorted or un-formatted
+    "I001",  # Import block is un-sorted or un-formatted. Isort and Ruff format are used in pre-commit
     "DOC",  # pydoclint  Mostly arguments and return value annotation. Done with type annotation.
     "CPY",  # copyright presence
     "COM812",  # trailing comma. As suggested by ruff formatter command
