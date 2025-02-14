@@ -36,7 +36,7 @@ class Expense(ExpenseNoUuid):
     def jsonify(self) -> dict:
         """Return a JSON representation of this instance."""
         json = super().jsonify()
-        json["uuid"] = self.uuid
+        json["uuid"] = str(self.uuid)
         return json
 
     def to_expense_without_uuid(self) -> ExpenseNoUuid:
