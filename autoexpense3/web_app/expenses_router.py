@@ -18,7 +18,7 @@ from autoexpense3.web_app.application import Application
 
 def build_expenses_router(application: Application) -> APIRouter:
     """Build the expenses router."""
-    expenses_router = APIRouter(prefix="/expenses")
+    expenses_router = APIRouter(prefix="/api/v1/expenses")
 
     @expenses_router.get("/")
     def expenses(hx_request: Annotated[str | None, Header] = None) -> Response:

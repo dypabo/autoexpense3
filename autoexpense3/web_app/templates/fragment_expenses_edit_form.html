@@ -1,6 +1,6 @@
 <tr class="edit_expense">
   <form
-      hx-put="/expenses/{{expense.uuid}}"
+      hx-put="/api/v1/expenses/{{expense.uuid}}/"
       id="edit_expense_form"
       hx-include="[name='edit_expense_date'], [name='edit_expense_seller'], [name='edit_expense_total']"
       hx-target="closest tr" hx-swap="outerHTML"

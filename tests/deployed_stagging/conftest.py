@@ -34,7 +34,7 @@ def repo_with_expenses(
             "new_expense_total": expense.total,
         }
         resp = requests.post(
-            f"{app_url}/expenses/?new_expense_uuid={expense.uuid}",
+            f"{app_url}/api/v1/expenses?new_expense_uuid={expense.uuid}",
             data=data,
             params=params,
             timeout=2,

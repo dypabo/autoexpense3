@@ -8,6 +8,6 @@ def test_can_remove_expense_from_expense_list(
     client: TestClient, application: Application, expense: Expense
 ) -> None:
     assert expense in application.repository.get_expenses()
-    response = client.delete(f"/expenses/{expense.uuid}")
+    response = client.delete(f"/api/v1/expenses/{expense.uuid}")
     assert response.is_success
     assert expense not in application.repository.get_expenses()
