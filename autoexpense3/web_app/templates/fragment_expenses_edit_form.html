@@ -1,0 +1,13 @@
+<tr class="edit_expense">
+  <form
+      hx-put="/expenses/{{expense.uuid}}"
+      id="edit_expense_form"
+      hx-include="[name='edit_expense_date'], [name='edit_expense_seller'], [name='edit_expense_total']"
+      hx-target="closest tr" hx-swap="outerHTML"
+  >
+    <td><input id="edit_expense_date" name="edit_expense_date" class="form-control" value="{{ expense.timestamp.strftime('%Y-%m-%d') }}"\></td>
+    <td><input id="edit_expense_seller" name="edit_expense_seller" class="form-control" value="{{expense.seller}}"\></td>
+    <td><input id="edit_expense_total" name="edit_expense_total" class="form-control" value="{{expense.total}}"\></td>
+    <td><button id="edit_expense_button" type="submit" form="edit_expense_form" class="btn btn-primary"><i class="bi bi-floppy"></i></button></td>
+  </form>
+</tr>

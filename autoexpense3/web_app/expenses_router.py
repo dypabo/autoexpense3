@@ -49,6 +49,27 @@ def build_expenses_router(application: Application) -> APIRouter:
             request=request, name="fragment_expenses.html", context={"expense": expense}
         )
 
+    @expenses_router.put("/{uuid}")
+    def edit_expense(
+        request: Request,
+        uuid: str,
+        edit_expense_date: Annotated[str, Form()],
+        edit_expense_seller: Annotated[str, Form()],
+        edit_expense_total: Annotated[float, Form()],
+    ) -> Response:
+        """Add new expense endpoint."""
+        date = f"{edit_expense_date}:{UTC}"
+        expense = Expense(
+            uuid=UUID(uuid),
+            timestamp=datetime.strptime(date, "%Y-%m-%d:%Z").replace(tzinfo=UTC),
+            seller=edit_expense_seller,
+            total=edit_expense_total,
+        )
+        application.repository.add_expense(expense)
+        return application.templates.TemplateResponse(
+            request=request, name="fragment_expenses.html", context={"expense": expense}
+        )
+
     @expenses_router.delete("/{uuid}")
     def remove_expense(
         uuid: UUID,
@@ -56,7 +77,21 @@ def build_expenses_router(application: Application) -> APIRouter:
         application.repository.remove_expense(uuid)
         return Response()
 
+    @expenses_router.get("/{uuid}/edit_form")
+    def edit_expense_form(
+        request: Request,
+        uuid: str,
+    ) -> Response:
+        expense = application.repository.get_expense(UUID(uuid))
+        return application.templates.TemplateResponse(
+            request=request,
+            name="fragment_expenses_edit_form.html",
+            context={"expense": expense},
+        )
+
     _ = expenses
     _ = new_expense
+    _ = edit_expense
     _ = remove_expense
+    _ = edit_expense_form
     return expenses_router
