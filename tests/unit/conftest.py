@@ -13,6 +13,6 @@ def empty_repo() -> RepositoryDict:
 @pytest.fixture
 def repo(empty_repo: RepositoryDict, expense: Expense, expense2: Expense) -> Repository:
     new_repo = empty_repo
-    new_repo._data["expenses"].append(expense)  # noqa: SLF001  # pylint: disable=protected-access
-    new_repo._data["expenses"].append(expense2)  # noqa: SLF001  # pylint: disable=protected-access
+    new_repo._data["expenses"][expense.uuid] = expense  # noqa: SLF001  # pylint: disable=protected-access
+    new_repo._data["expenses"][expense2.uuid] = expense2  # noqa: SLF001  # pylint: disable=protected-access
     return new_repo
