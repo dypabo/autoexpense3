@@ -35,11 +35,12 @@ def build_expenses_router(application: Application) -> APIRouter:
         new_expense_date: Annotated[str, Form()],
         new_expense_seller: Annotated[str, Form()],
         new_expense_total: Annotated[float, Form()],
+        new_expense_uuid: Annotated[str, Form()] | None = None,
     ) -> Response:
         """Add new expense endpoint."""
         date = f"{new_expense_date}:{UTC}"
         expense = Expense(
-            uuid=uuid4(),
+            uuid=uuid4() if new_expense_uuid is None else UUID(new_expense_uuid),
             timestamp=datetime.strptime(date, "%Y-%m-%d:%Z").replace(tzinfo=UTC),
             seller=new_expense_seller,
             total=new_expense_total,
