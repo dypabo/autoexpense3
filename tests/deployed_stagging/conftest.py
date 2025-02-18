@@ -18,13 +18,22 @@ def homepage(
 
 
 @pytest.fixture
+def expenses_page(
+    page: Page, url: str, real_web_application: Generator[None, None, None]
+) -> Page:
+    _ = real_web_application
+    page.goto(url)
+    return page
+
+
+@pytest.fixture
 def app_url() -> str:
     return "http://127.0.0.1:8000"
 
 
 @pytest.fixture
 def repo_with_expenses(
-    app_url: str, repo_expenses: list[Expense], homepage: Page
+    app_url: str, repo_expenses: list[Expense], expenses_page: Page
 ) -> list[Expense]:
     for expense in repo_expenses:
         params = {"new_expense_uuid": str(expense.uuid)}
@@ -40,5 +49,5 @@ def repo_with_expenses(
             timeout=2,
         )
         resp.raise_for_status()
-    homepage.reload()
+    expenses_page.reload()
     return repo_expenses
