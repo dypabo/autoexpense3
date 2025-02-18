@@ -4,7 +4,7 @@ from os import environ
 
 from fastapi import APIRouter
 from fastapi.requests import Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 
 from autoexpense3.web_app.application import Application
 from autoexpense3.web_app.constants import APP_NAME
@@ -16,10 +16,16 @@ def build_webpage_router(application: Application) -> APIRouter:
     webpage_router = APIRouter()
 
     @webpage_router.get("/")
-    def homepage(request: Request) -> RedirectResponse:
+    def homepage(request: Request) -> HTMLResponse:
         """Homepage route request processor."""
-        _ = request
-        return RedirectResponse("/user")
+        context = {
+            "app_name": APP_NAME,
+        }
+        return application.templates.TemplateResponse(
+            request=request,
+            name="homepage.html",
+            context=context,
+        )
 
     @webpage_router.get("/user")
     def user(request: Request) -> HTMLResponse:
@@ -36,7 +42,7 @@ def build_webpage_router(application: Application) -> APIRouter:
         }
         return application.templates.TemplateResponse(
             request=request,
-            name="homepage.html",
+            name="expenses.html",
             context=context,
         )
 

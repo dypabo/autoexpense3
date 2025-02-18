@@ -2,31 +2,4 @@
 {% block content %}
 <div class="container-md">
 </div>
-<div class="container-md">
-  <table class="table table-striped">
-    <thead>
-      <tr><th>date</th><th>seller</th><th>total</th><th>&nbsp;</th></tr>
-    </thead>
-    <tbody id="expenses">
-        <tr class="new_expense">
-          <form
-              hx-post="/api/v1/expenses"
-              hx-headers='{"Upgrade-Insecure-Requests": 1}'
-              id="new_expense_form"
-              hx-target="#expenses"
-              hx-swap="beforeend"
-              hx-on:htmx:after-request="this.reset()">
-          <input id="new_expense_uuid" name="new_expense_uuid" class="form-control" value="tbd" style="display: none"\>
-          <td><input id="new_expense_date" name="new_expense_date" class="form-control" value="{{ today.strftime('%Y-%m-%d') }}"\></td>
-          <td><input id="new_expense_seller" name="new_expense_seller" class="form-control" placeholder="seller"\></td>
-          <td><input id="new_expense_total" name="new_expense_total" class="form-control" placeholder="total"\></td>
-          <td><button id="new_expense_button" type="submit" form="new_expense_form" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></button></td>
-          </form>
-        </tr>
-      {% for expense in expenses %}
-        {% include "fragment_expenses.html" %}
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
 {% endblock %}

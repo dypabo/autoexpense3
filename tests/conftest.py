@@ -40,6 +40,12 @@ def client(application: Application) -> TestClient:
 
 
 @pytest.fixture
+def user_expenses_content(client: TestClient) -> str:
+    response = client.get("/user")
+    return str(response.content)
+
+
+@pytest.fixture
 def homepage_content(client: TestClient) -> str:
     response = client.get("/")
     return str(response.content)
