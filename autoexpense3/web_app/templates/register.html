@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-md md-4">
+  <tbody id="register">
+    <form
+        hx-post="/register"
+        hx-headers='{"Upgrade-Insecure-Requests": 1}'
+        id="register_form"
+        hx-swap="none"
+    >
+      <input id="register_email" name="email" class="form-control" placeholder="email"\>
+      <input id="register_password" name="password" type="password" class="form-control" placeholder="password"\>
+      <button id="register_button" type="submit" form="register_form" class="btn btn-primary">Register</button>
+    </form>
+  </tbody>
+  </div>
+{% endblock %}
