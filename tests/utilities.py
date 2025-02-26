@@ -6,9 +6,19 @@ import psutil
 from faker import Faker
 
 from autoexpense3.models.expense import Expense
+from autoexpense3.models.user import User
 
 DATE_FORMAT = "%Y-%m-%d"
 fake = Faker()
+
+
+def build_user() -> User:
+    """Generate random user."""
+    return User(
+        uuid4(),
+        fake.name(),
+        fake.password(),
+    )
 
 
 def build_expense() -> Expense:

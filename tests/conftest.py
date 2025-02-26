@@ -7,9 +7,11 @@ import pytest
 from fastapi.testclient import TestClient
 
 from autoexpense3.models.expense import Expense
+from autoexpense3.models.user import User
 from autoexpense3.web_app.app import application as _application
 from autoexpense3.web_app.application import Application
 from tests.utilities import build_expense
+from tests.utilities import build_user
 from tests.utilities import kill_process_and_children
 
 
@@ -59,3 +61,13 @@ def expense() -> Expense:
 @pytest.fixture
 def expense2() -> Expense:
     return build_expense()
+
+
+@pytest.fixture
+def user1() -> User:
+    return build_user()
+
+
+@pytest.fixture
+def user2() -> User:
+    return build_user()
